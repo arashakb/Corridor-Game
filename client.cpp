@@ -37,6 +37,7 @@ int main(void) {
 				cin >> choose ;
 				if (choose == 0) {
 					auto res = cli.Get("/map");
+					if (res->body[0] != 'W') {
 						cout << "UPDATED MAP: " << endl;
 						int t = 0;
 						for (int i = 0; i < 11; i++) {
@@ -45,10 +46,11 @@ int main(void) {
 							cout << endl;
 						}
 						cout <<"- - - - - - - - - - - - - - - - - - - " << endl;
+					}else cout <<  "ERROR: " << res->body << endl;
 				}
 				else if (choose == 1) {
 					auto res = cli.Post("/move_down", pl_str, "text/plain");
-					if (res->body[0] != 'P' && res->body[0] != 'Y') {
+					if (res->body[0] != 'P' && res->body[0] != 'Y' && res->body[0] != 'W') {
 						cout << "UPDATED MAP: " << endl;
 						int t = 0;
 						for (int i = 0; i < 11; i++) {
@@ -57,11 +59,11 @@ int main(void) {
 							cout << endl;
 						}
 						cout <<"- - - - - - - - - - - - - - - - - - - " << endl;
-					} else cout << res->body << endl;
+					} else cout <<  "ERROR: " << res->body << endl;
 				}
 				else if (choose == 2) {
 						auto res = cli.Post("/move_up", pl_str, "text/plain");
-						if (res->body[0] != 'P' && res->body[0] != 'Y') {
+						if (res->body[0] != 'P' && res->body[0] != 'Y' && res->body[0] != 'W') {
 							cout << "UPDATED MAP: " << endl;
 							int t = 0;
 							for (int i = 0; i < 11; i++) {
@@ -70,11 +72,11 @@ int main(void) {
 								cout << endl;
 							}
 							cout <<"- - - - - - - - - - - - - - - - - - - " << endl;
-						} else cout << res->body << endl;
+						} else cout <<  "ERROR: " << res->body << endl;
 				}
 				else if (choose == 3) {
 					auto res = cli.Post("/move_left", pl_str, "text/plain");
-					if (res->body[0] != 'P' && res->body[0] != 'Y') {
+					if (res->body[0] != 'P' && res->body[0] != 'Y' && res->body[0] != 'W') {
 						cout << "UPDATED MAP: " << endl;
 						int t = 0;
 						for (int i = 0; i < 11; i++) {
@@ -83,11 +85,11 @@ int main(void) {
 							cout << endl;
 						}
 						cout <<"- - - - - - - - - - - - - - - - - - - " << endl;
-					} else cout << res->body << endl;
+					} else cout <<  "ERROR: " << res->body << endl;
 				}
 				else if (choose == 4) {
 					auto res = cli.Post("/move_right", pl_str, "text/plain");
-					if (res->body[0] != 'P' && res->body[0] != 'Y') {
+					if (res->body[0] != 'P' && res->body[0] != 'Y' && res->body[0] != 'W') {
 						cout << "UPDATED MAP: " << endl;
 						int t = 0;
 						for (int i = 0; i < 11; i++) {
@@ -96,7 +98,7 @@ int main(void) {
 							cout << endl;
 						}
 						cout <<"- - - - - - - - - - - - - - - - - - - " << endl;
-					} else cout << res->body << endl;
+					} else cout << "ERROR: " << res->body << endl;
 				}
 				else if (choose == 5) {
 					int x, y;
@@ -104,7 +106,7 @@ int main(void) {
 					cout << "X: " ; cin >> x; cout << "Y: " ; cin >> y;
 					string str = pl_str + to_string(x) + "      " + to_string(y);
 					auto wall = cli.Post("/vert_wall", str, "text/plain");
-					if (wall->body[0] != 'P' && wall->body[0] != 'Y') {
+					if (wall->body[0] != 'P' && wall->body[0] != 'Y' && wall->body[0] != 'W') {
 						cout << "UPDATED MAP: " << endl;
 						int t = 0;
 						for (int i = 0; i < 11; i++) {
@@ -113,7 +115,7 @@ int main(void) {
 							cout << endl;
 						}
 						cout <<"- - - - - - - - - - - - - - - - - - - " << endl;
-					} else cout << wall->body << endl;
+					} else cout <<  "ERROR: " << wall->body << endl;
 				}
 				else if (choose == 6) {
 					int x, y;
@@ -121,7 +123,7 @@ int main(void) {
 					cout << "X: " ; cin >> x; cout << "Y: " ; cin >> y;
 					string str = pl_str + to_string(x) + "      " + to_string(y);
 					auto wall = cli.Post("/horiz_wall", str, "text/plain");
-					if (wall->body[0] != 'P' && wall->body[0] != 'Y') {
+					if (wall->body[0] != 'P' && wall->body[0] != 'Y' && wall->body[0] != 'W') {
 						cout << "UPDATED MAP: " << endl;
 						int t = 0;
 						for (int i = 0; i < 11; i++) {
@@ -130,7 +132,7 @@ int main(void) {
 							cout << endl;
 						}
 						cout <<"- - - - - - - - - - - - - - - - - - - " << endl;
-					} else cout << wall->body << endl;
+					} else cout <<  "ERROR: " << wall->body << endl;
 				}
 				else 
 					cout << "INVALID INPUT!" << endl;
