@@ -1,6 +1,7 @@
 {
     "editor.fontSize": 16,
     "files.associations": {
-        "map": "cpp"
+        "map": "cpp",
+        "iostream": "cpp"
     }
 }

@@ -2,7 +2,7 @@ CC = g++
 CFLAGS= -I.
 DEPS = Corridor.h
 OBJ = server.o Corridor.o 
-all: server
+all: server client
 
 server: $(OBJ)
 	$(CC) -std=c++11 -o $@ $^ -lpthread $(CFLAGS)

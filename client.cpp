@@ -30,8 +30,10 @@ int main(void) {
 					cout << "THE WINNER IS " + win->body << endl;
 					break;
 				}
-				cout << "0.SEE THE UPDATED MAP\n1. Move down\n2. Move up\n3. Move left\n4. Move right\n5. Vertical Wall\n6. Horizental Wall\n7. Leave The Game" << endl;
+				cout << "\t0.SEE THE UPDATED MAP\n\t1. Move down\n\t2. Move up\n\t3. Move left\n\t4. Move right\n\t5. Vertical Wall\n\t6. Horizental Wall\n\t7. Leave The Game" << endl;
+				cout <<"- - - - - - - - - - - - - - - - - - - " << endl;
 				cin.ignore();
+				cout << "ENTER YOUR CHOICE: " ;
 				cin >> choose ;
 				if (choose == 0) {
 					auto res = cli.Get("/map");
@@ -44,7 +46,7 @@ int main(void) {
 						}
 						cout <<"- - - - - - - - - - - - - - - - - - - " << endl;
 				}
-				if (choose == 1) {
+				else if (choose == 1) {
 					auto res = cli.Post("/move_down", pl_str, "text/plain");
 					if (res->body[0] != 'P' && res->body[0] != 'Y') {
 						cout << "UPDATED MAP: " << endl;
@@ -130,7 +132,8 @@ int main(void) {
 						cout <<"- - - - - - - - - - - - - - - - - - - " << endl;
 					} else cout << wall->body << endl;
 				}
-				else cout << "INVALID INPUT!" << endl;
+				else 
+					cout << "INVALID INPUT!" << endl;
 		}
 	}
 }
