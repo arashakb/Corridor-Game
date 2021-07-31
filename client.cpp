@@ -23,11 +23,16 @@ int main(void) {
 	cout << "Enter 1 to start the game ";
 	int s; cin >> s;
 	if (s == 1) {
-		int choose=100, flag = 0;
+		int choose = 100, flag = 0;
 		while (choose != 7) {
 				auto win = cli.Get("/win");
 				if (win->body != "0") {
 					cout << "THE WINNER IS " + win->body << endl;
+					break;
+				}
+				auto exit = cli.Get("/exit");
+				if (exit->body == "1") {
+					cout << "SORRY, SOMEONE QUIT THE GAME!" << endl;
 					break;
 				}
 				cout << "\t0.SEE THE UPDATED MAP\n\t1. Move down\n\t2. Move up\n\t3. Move left\n\t4. Move right\n\t5. Vertical Wall\n\t6. Horizental Wall\n\t7. Leave The Game" << endl;
@@ -133,6 +138,9 @@ int main(void) {
 						}
 						cout <<"- - - - - - - - - - - - - - - - - - - " << endl;
 					} else cout <<  "ERROR: " << wall->body << endl;
+				}
+				else if (choose == 7) {
+					cli.Get("/someone_exited");
 				}
 				else 
 					cout << "INVALID INPUT!" << endl;

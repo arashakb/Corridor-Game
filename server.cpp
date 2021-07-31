@@ -6,7 +6,7 @@
 using namespace std;
 using namespace httplib;
 
-int player_number, player_number_counter=0; string plt_str, check_enter_flag = "0";
+int player_number, player_number_counter=0, exit_flag = 0; string plt_str, check_enter_flag = "0";
 
 int main(void)
 {
@@ -163,6 +163,16 @@ int main(void)
 				} else res.set_content("YOU CAN'T PUT HORIZENTAL WALL AT THERE", "text/plain");
 			}
 		}else res.set_content("WAIT FOR OTHER PLAYERS TO JOIN THE GAME!", "text/plain");
+	});
+
+	svr.Get("/someone_exited", [&](const Request &req, Response &res) {	
+		exit_flag = 1;
+	});
+	svr.Get("/exit", [&](const Request &req, Response &res) {	
+		if (exit_flag == 1)
+			res.set_content("1", "text/plain");
+		else
+			res.set_content("0", "text/plain");
 	});
 
 	svr.listen("127.0.0.1", 8080);
