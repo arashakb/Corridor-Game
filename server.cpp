@@ -23,7 +23,7 @@ int main(void)
 		res.set_content(plt_str, "text/plain");
 	});
 
-	//SEND MAP TO CLIENT
+	//SEND MAP TO THE CLIENT .......
 	svr.Get("/map", [&](const Request &, Response &res) {
 		string map_string;
 		map_string = game_obj.show_map();

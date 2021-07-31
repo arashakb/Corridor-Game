@@ -1,16 +1,18 @@
+CC = g++
+CFLAGS= -I.
+DEPS = Corridor.h
+OBJ = server.o Corridor.o 
+all: server
 
-all: server client
+server: $(OBJ)
+	$(CC) -std=c++11 -o $@ $^ -lpthread $(CFLAGS)
 
-main: client.cpp server.cpp Corridor.cpp
-	g++ -std=c++11 -o server Corridor.cpp server.cpp -lpthread -I.
-	g++ -std=c++11 -o client client.cpp -lpthread -I.
+client: client.cpp
+	$(CC) -std=c++11 -o client $< -lpthread $(CFLAGS)
 
-open_client:
-	@vim client.cpp
-open_server:
-	@vim server.cpp
-server:
-	@g++ -std=c++11 -o server server.cpp -lpthread -I.
-client:
-	@g++ -std=c++11 -o client client.cpp -lpthread -I.
+%.o: %.cpp $(DEPS)
+	$(CC) -std=c++11 -c -o $@ $< -lpthread $(CFLAGS)
+
+clean:
+	rm -f *.o server client
 

@@ -4,13 +4,13 @@
 #include <sstream>
 using namespace std;
 
-int flag = 0, permission = 0;
+int flag = 0;
 
 int main(void) {
 	int player_name;
 	string pl_str;
 	httplib::Client cli("localhost",8080);
-	//SENDING PLAYER NUMBER TO SERVER
+	//SENDING PLAYER NUMBER TO SERVER...
 	cout << "[+]WELCOME TO THE GAME.\nWHAT IS YOUR PLAYER NUMBER?(1 OR 2 OR 3 OR 4) " ;
 	cin >> player_name;
 	stringstream ss;
@@ -19,12 +19,12 @@ int main(void) {
 	auto h = cli.Post("/player_name", pl_str, "text/plain");
 	cout << h->body << endl;
 	if (h->body.substr(0,1) == "T")
-		permission = 1;
+		return 0;
 	cout << "Enter 1 to start the game ";
 	int s; cin >> s;
 	if (s == 1) {
 		int choose=100, flag = 0;
-		while (choose != 7 && permission == 0) {
+		while (choose != 7) {
 				auto win = cli.Get("/win");
 				if (win->body != "0") {
 					cout << "THE WINNER IS " + win->body << endl;
